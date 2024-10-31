@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>My E-Commerce Store</h1>
+        <div class="cart">
+            <button onclick="viewCart()">View Cart (0)</button>
+        </div>
+    </header>
+    <main>
+        <div class="product" data-id="1" data-name="Product 1" data-price="19.99">
+            <h2>Product 1</h2>
+            <p>Price: $19.99</p>
+            <button onclick="addToCart(1, 'Product 1', 19.99)">Add to Cart</button>
+        </div>
+        <div class="product" data-id="2" data-name="Product 2" data-price="29.99">
+            <h2>Product 2</h2>
+            <p>Price: $29.99</p>
+            <button onclick="addToCart(2, 'Product 2', 29.99)">Add to Cart</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 My E-Commerce Store</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.product {
+    border: 1px solid #ccc;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+let cart = [];
+
+function addToCart(id, name, price) {
+    cart.push({ id, name, price });
+    updateCartCount();
+}
+
+function updateCartCount() {
+    const cartButton = document.querySelector('.cart button');
+    cartButton.textContent = `View Cart (${cart.length})`;
+}
+
+function viewCart() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    
+    let cartContent = "Items in your cart:\n";
+    cart.forEach(item => {
+        cartContent += `${item.name} - $${item.price}\n`;
+    });
+    alert(cartContent);
+}
